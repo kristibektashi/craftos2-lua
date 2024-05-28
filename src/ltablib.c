@@ -181,7 +181,7 @@ static int setn (lua_State *L) {
 
 
 static int tinsert (lua_State *L) {
-  int e;  /* first empty element */
+  int e = 0;  /* first empty element */
   int pos;  /* where to insert new element */
   int ctx = 0;
   if (lua_getctx(L, &ctx) == LUA_YIELD) {

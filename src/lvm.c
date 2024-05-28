@@ -148,7 +148,6 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
 
 void luaV_settable (lua_State *L, const TValue *t, TValue *key, StkId val) {
   int loop;
-  TValue temp;
   resolverope(L, key);
   resolvesubstr(L, key);
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
