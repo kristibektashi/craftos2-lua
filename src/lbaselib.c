@@ -459,18 +459,16 @@ static int aux_fenv(lua_State *L, int idx, int setidx) {
         lua_pushvalue(L, setidx);
         lua_setupvalue(L, -2, 1);
         lua_upvaluejoin(L, idx, i, -1, 1);
-        return 0;
-      } else {
-        return 1;
+        lua_pushvalue(L, idx);
       }
+      return 1;
     }
     lua_pop(L, 1);
   }
-  if (setidx) return 0;
-  else {
-    lua_pushglobaltable(L);
-    return 1;
-  }
+  if (setidx)
+    lua_pushvalue(L, idx);
+  else lua_pushglobaltable(L);
+  return 1;
 }
 
 
