@@ -28,7 +28,17 @@ static int auxresume (lua_State *L, lua_State *co, int narg) {
     return -1;  /* error flag */
   }
   lua_xmove(L, co, narg);
+  lua_getfield(L, LUA_REGISTRYINDEX, "_coroutine_stack");
+  if (lua_istable(L, -1)) {
+    lua_pushthread(co);
+    lua_xmove(co, L, 1);
+    lua_rawseti(L, -2, lua_rawlen(L, -2) + 1);
+  }
   status = lua_resume(co, L, narg);
+  if (lua_istable(L, -1)) {
+    lua_pushnil(L);
+    lua_rawseti(L, -2, lua_rawlen(L, -2));
+  }
   if (status == LUA_OK || status == LUA_YIELD) {
     int nres = lua_gettop(co);
     if (!lua_checkstack(L, nres + 1)) {

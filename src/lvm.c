@@ -1041,6 +1041,10 @@ void luaV_execute (lua_State *L) {
         if (!(ci->callstatus & CIST_REENTRY))  /* 'ci' still the called one */
           return;  /* external invocation: return */
         else {  /* invocation via reentry: continue execution */
+          if (!ttisLclosure(L->ci->func)) {  /* closure replaced while running? */
+            luaO_pushfstring(L, "corrupt call stack");
+            luaG_errormsg(L);
+          }
           ci = L->ci;
           if (b) L->top = ci->top;
           lua_assert(isLua(ci));
