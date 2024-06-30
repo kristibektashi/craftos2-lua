@@ -589,6 +589,12 @@ LUA_API int lua_resume (lua_State *L, lua_State *from, int nargs) {
   int status;
   int oldnny = L->nny;  /* save 'nny' */
   lua_lock(L);
+  if (from && G(L) != G(from)) {
+    L->top -= nargs;  /* remove args from the stack */
+    setsvalue2s(L, L->top, luaS_new(L, "cannot resume foreign coroutine"));  /* push error message */
+    api_incr_top(L);
+    return LUA_ERRRUN;
+  }
   if (L->hookmask & LUA_MASKRESUME) {
     status = L->status;
     L->status = 0;
