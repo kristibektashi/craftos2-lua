@@ -13,6 +13,7 @@
 /.vscode
 x86
 x64
+ARM
 ARM64
 lua
 luac
