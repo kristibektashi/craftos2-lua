@@ -11,6 +11,7 @@
 *.dylib
 /.vs
 /.vscode
+/Debug
 x86
 x64
 ARM
