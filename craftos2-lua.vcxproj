@@ -161,7 +161,7 @@
     <OutDir>bin\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgManifestInstall>true</VcpkgManifestInstall>
+    <VcpkgManifestInstall>false</VcpkgManifestInstall>
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
