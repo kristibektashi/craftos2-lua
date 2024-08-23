@@ -12,7 +12,7 @@
 /.vs
 /.vscode
 /Debug
-lib/
+bin/
 obj/
 lua
 luac
