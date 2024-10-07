@@ -76,6 +76,7 @@ static int luaB_coresume (lua_State *L) {
 
 static int luaB_auxwrap (lua_State *L) {
   lua_State *co = lua_tothread(L, lua_upvalueindex(1));
+  if (co == NULL) luaL_error(L, "coroutine upvalue missing");
   int r = auxresume(L, co, lua_gettop(L));
   if (r < 0) {
     if (lua_isstring(L, -1)) {  /* error object is a string? */
